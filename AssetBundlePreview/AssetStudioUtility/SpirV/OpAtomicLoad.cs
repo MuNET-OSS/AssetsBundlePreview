@@ -1,0 +1,18 @@
+using System.Collections.Generic;
+
+namespace SpirV;
+
+public class OpAtomicLoad : Instruction
+{
+	public OpAtomicLoad()
+		: base("OpAtomicLoad", new List<Operand>
+		{
+			new Operand(new IdResultType(), null, OperandQuantifier.Default),
+			new Operand(new IdResult(), null, OperandQuantifier.Default),
+			new Operand(new IdRef(), "Pointer", OperandQuantifier.Default),
+			new Operand(new IdScope(), "Scope", OperandQuantifier.Default),
+			new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default)
+		})
+	{
+	}
+}

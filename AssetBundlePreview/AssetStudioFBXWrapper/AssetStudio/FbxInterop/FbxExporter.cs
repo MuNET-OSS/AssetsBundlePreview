@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+
+namespace AssetStudio.FbxInterop;
+
+internal sealed class FbxExporter : IDisposable
+{
+	private FbxExporterContext _context;
+
+	private readonly string _fileName;
+
+	private readonly IImported _imported;
+
+	private readonly bool _allNodes;
+
+	private readonly bool _exportSkins;
+
+	private readonly bool _castToBone;
+
+	private readonly float _boneSize;
+
+	private readonly bool _exportAllUvsAsDiffuseMaps;
+
+	private readonly float _scaleFactor;
+
+	private readonly int _versionIndex;
+
+	private readonly bool _isAscii;
+
+	public bool IsDisposed { get; private set; }
+
+	internal FbxExporter(string fileName, IImported imported, bool allNodes, bool exportSkins, bool castToBone, float boneSize, bool exportAllUvsAsDiffuseMaps, float scaleFactor, int versionIndex, bool isAscii)
+	{
+		_context = new FbxExporterContext();
+		_fileName = fileName;
+		_imported = imported;
+		_allNodes = allNodes;
+		_exportSkins = exportSkins;
+		_castToBone = castToBone;
+		_boneSize = boneSize;
+		_exportAllUvsAsDiffuseMaps = exportAllUvsAsDiffuseMaps;
+		_scaleFactor = scaleFactor;
+		_versionIndex = versionIndex;
+		_isAscii = isAscii;
+	}
+
+	~FbxExporter()
+	{
+		Dispose(disposing: false);
+	}
+
+	public void Dispose()
+	{
+		if (!IsDisposed)
+		{
+			Dispose(disposing: true);
+			GC.SuppressFinalize(this);
+		}
+	}
+
+	private void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+			_context.Dispose();
+		}
+		IsDisposed = true;
+	}
+
+	internal void Initialize()
+	{
+		bool is60Fps = _imported.AnimationList.Count > 0 && _imported.AnimationList[0].SampleRate.Equals(60f);
+		_context.Initialize(_fileName, _scaleFactor, _versionIndex, _isAscii, is60Fps);
+		if (!_allNodes)
+		{
+			HashSet<string> framePaths = SearchHierarchy();
+			_context.SetFramePaths(framePaths);
+		}
+	}
+
+	internal void ExportAll(bool blendShape, bool animation, bool eulerFilter, float filterPrecision)
+	{
+		List<ImportedFrame> meshFrames = new List<ImportedFrame>();
+		ExportRootFrame(meshFrames);
+		if (_imported.MeshList != null)
+		{
+			SetJointsFromImportedMeshes();
+			PrepareMaterials();
+			ExportMeshFrames(_imported.RootFrame, meshFrames);
+		}
+		else
+		{
+			SetJointsNode(_imported.RootFrame, null, castToBone: true);
+		}
+		if (blendShape)
+		{
+			ExportMorphs();
+		}
+		if (animation)
+		{
+			ExportAnimations(eulerFilter, filterPrecision);
+		}
+		ExportScene();
+	}
+
+	private void ExportMorphs()
+	{
+		_context.ExportMorphs(_imported.RootFrame, _imported.MorphList);
+	}
+
+	private void ExportAnimations(bool eulerFilter, float filterPrecision)
+	{
+		_context.ExportAnimations(_imported.RootFrame, _imported.AnimationList, eulerFilter, filterPrecision);
+	}
+
+	private void ExportRootFrame(List<ImportedFrame> meshFrames)
+	{
+		_context.ExportFrame(_imported.MeshList, meshFrames, _imported.RootFrame);
+	}
+
+	private void ExportScene()
+	{
+		_context.ExportScene();
+	}
+
+	private void SetJointsFromImportedMeshes()
+	{
+		if (!_exportSkins)
+		{
+			return;
+		}
+		HashSet<string> bonePaths = new HashSet<string>();
+		foreach (ImportedMesh mesh in _imported.MeshList)
+		{
+			List<ImportedBone> boneList = mesh.BoneList;
+			if (boneList == null)
+			{
+				continue;
+			}
+			foreach (ImportedBone bone in boneList)
+			{
+				bonePaths.Add(bone.Path);
+			}
+		}
+		SetJointsNode(_imported.RootFrame, bonePaths, _castToBone);
+	}
+
+	private void SetJointsNode(ImportedFrame rootFrame, HashSet<string> bonePaths, bool castToBone)
+	{
+		_context.SetJointsNode(rootFrame, bonePaths, castToBone, _boneSize);
+	}
+
+	private void PrepareMaterials()
+	{
+		_context.PrepareMaterials(_imported.MaterialList.Count, _imported.TextureList.Count);
+	}
+
+	private void ExportMeshFrames(ImportedFrame rootFrame, List<ImportedFrame> meshFrames)
+	{
+		foreach (ImportedFrame meshFrame in meshFrames)
+		{
+			_context.ExportMeshFromFrame(rootFrame, meshFrame, _imported.MeshList, _imported.MaterialList, _imported.TextureList, _exportSkins, _exportAllUvsAsDiffuseMaps);
+		}
+	}
+
+	private HashSet<string> SearchHierarchy()
+	{
+		if (_imported.MeshList == null || _imported.MeshList.Count == 0)
+		{
+			return null;
+		}
+		HashSet<string> exportFrames = new HashSet<string>();
+		SearchHierarchy(_imported.RootFrame, _imported.MeshList, exportFrames);
+		return exportFrames;
+	}
+
+	private static void SearchHierarchy(ImportedFrame rootFrame, List<ImportedMesh> meshList, HashSet<string> exportFrames)
+	{
+		Stack<ImportedFrame> frameStack = new Stack<ImportedFrame>();
+		frameStack.Push(rootFrame);
+		while (frameStack.Count > 0)
+		{
+			ImportedFrame frame = frameStack.Pop();
+			ImportedMesh meshListSome = ImportedHelpers.FindMesh(frame.Path, meshList);
+			if (meshListSome != null)
+			{
+				for (ImportedFrame parent = frame; parent != null; parent = parent.Parent)
+				{
+					exportFrames.Add(parent.Path);
+				}
+				List<ImportedBone> boneList = meshListSome.BoneList;
+				if (boneList != null)
+				{
+					foreach (ImportedBone bone in boneList)
+					{
+						if (!exportFrames.Contains(bone.Path))
+						{
+							for (ImportedFrame boneParent = rootFrame.FindFrameByPath(bone.Path); boneParent != null; boneParent = boneParent.Parent)
+							{
+								exportFrames.Add(boneParent.Path);
+							}
+						}
+					}
+				}
+			}
+			for (int i = frame.Count - 1; i >= 0; i--)
+			{
+				frameStack.Push(frame[i]);
+			}
+		}
+	}
+}

@@ -1,0 +1,38 @@
+namespace AssetStudio;
+
+public enum ShaderGpuProgramType
+{
+	Unknown,
+	GLLegacy,
+	GLES31AEP,
+	GLES31,
+	GLES3,
+	GLES,
+	GLCore32,
+	GLCore41,
+	GLCore43,
+	DX9VertexSM20,
+	DX9VertexSM30,
+	DX9PixelSM20,
+	DX9PixelSM30,
+	DX10Level9Vertex,
+	DX10Level9Pixel,
+	DX11VertexSM40,
+	DX11VertexSM50,
+	DX11PixelSM40,
+	DX11PixelSM50,
+	DX11GeometrySM40,
+	DX11GeometrySM50,
+	DX11HullSM50,
+	DX11DomainSM50,
+	MetalVS,
+	MetalFS,
+	SPIRV,
+	ConsoleVS,
+	ConsoleFS,
+	ConsoleHS,
+	ConsoleDS,
+	ConsoleGS,
+	RayTracing,
+	PS5NGGC
+}

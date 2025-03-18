@@ -1,0 +1,1048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\packages\ILMerge.Fody.1.24.0\build\ILMerge.Fody.props" Condition="Exists('..\packages\ILMerge.Fody.1.24.0\build\ILMerge.Fody.props')" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{31AB8D2D-E308-4C7B-B2FA-B6FD6B1F85CD}</ProjectGuid>
+        <OutputType>WinExe</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>AssetBundlePreview</RootNamespace>
+        <AssemblyName>AssetBundlePreview</AssemblyName>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>latest</LangVersion>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>qwq.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>true</PublicSign>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ApplicationIcon>5067002021236704128.ico</ApplicationIcon>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="ILMerge, Version=1.24.0.0, Culture=neutral, PublicKeyToken=4d0e9a1cbec0d397, processorArchitecture=MSIL">
+          <HintPath>..\packages\ILMerge.Fody.1.24.0\lib\net452\ILMerge.dll</HintPath>
+        </Reference>
+        <Reference Include="K4os.Compression.LZ4, Version=1.1.10.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+          <HintPath>..\packages\K4os.Compression.LZ4.1.1.10\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
+        <Reference Include="ServerRegistrationManager, Version=2.7.2.0, Culture=neutral, PublicKeyToken=68bd4561cc3495fc, processorArchitecture=X86">
+          <HintPath>..\packages\ServerRegistrationManager.2.7.2\lib\net45\ServerRegistrationManager.exe</HintPath>
+        </Reference>
+        <Reference Include="SharpShell, Version=2.7.2.0, Culture=neutral, PublicKeyToken=f14dc899472fe6fb, processorArchitecture=MSIL">
+          <HintPath>..\packages\SharpShell.2.7.2\lib\net40-client\SharpShell.dll</HintPath>
+        </Reference>
+        <Reference Include="SixLabors.ImageSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+          <HintPath>..\packages\SixLabors.ImageSharp.1.0.4\lib\net472\SixLabors.ImageSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+        </Reference>
+        <Reference Include="System.ComponentModel.Composition">
+          <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.IO.Compression" />
+        <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="AssetBundleThumbnailHandler.cs" />
+        <Compile Include="AssetStudio.PInvoke\AssetStudio\PInvoke\DllLoader.cs" />
+        <Compile Include="AssetStudio.PInvoke\AssetStudio\PInvoke\Utf8StringHandle.cs" />
+        <Compile Include="AssetStudioFBXWrapper\AssetStudio\Fbx.cs" />
+        <Compile Include="AssetStudioFBXWrapper\AssetStudio\FbxInterop\FbxDll.cs" />
+        <Compile Include="AssetStudioFBXWrapper\AssetStudio\FbxInterop\FbxExporter.cs" />
+        <Compile Include="AssetStudioFBXWrapper\AssetStudio\FbxInterop\FbxExporterContext.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\AudioClipConverter.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ImageFormat.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ModelExporter.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\SerializedTypeHelper.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ShaderConverter.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ShaderProgram.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ShaderSubProgram.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\ShaderSubProgramEntry.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\SpirVShaderConverter.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\Texture2DConverter.cs" />
+        <Compile Include="AssetStudioUtility\AssetStudio\Texture2DExtensions.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ADVANCEDSETTINGS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ASYNCREADINFO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ASYNCREADINFO_DONE_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CB_3D_ROLLOFFCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Channel.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ChannelControl.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNELCONTROL_CALLBACK_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNELCONTROL_DSP_INDEX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNELCONTROL_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ChannelGroup.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNELMASK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNELORDER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CHANNEL_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\COMPLEX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CONSTANTS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\CREATESOUNDEXINFO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Debug.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DEBUG_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DEBUG_FLAGS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DEBUG_MODE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DRIVER_STATE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSPConnection.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSPCONNECTION_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_BUFFER_ARRAY.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_CHANNELMIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_CHANNELMIX_OUTPUT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_CHORUS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_COMPRESSOR.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_CONVOLUTION_REVERB.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_CREATECALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_DELAY.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_DESCRIPTION.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_DFT_FFTREAL.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_DFT_IFFTREAL.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_DISTORTION.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_ECHO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_ENVELOPEFOLLOWER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_FFT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_FFT_WINDOW.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_FLANGE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_GETPARAM_BOOL_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_GETPARAM_DATA_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_GETPARAM_FLOAT_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_GETPARAM_INT_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_HIGHPASS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_HIGHPASS_SIMPLE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_ITECHO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_ITLOWPASS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_LIMITER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_LOWPASS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_LOWPASS_SIMPLE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_METERING_INFO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_NORMALIZE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_OSCILLATOR.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_3D_EXTENT_MODE_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_3D_GET_ROLLOFF_GAIN.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_3D_ROLLOFF_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_MODE_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SUM_MONO_MATRIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SUM_MONO_TO_SURROUND_MATRIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SUM_STEREO_MATRIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SUM_STEREO_TO_SURROUND_MATRIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SUM_SURROUND_MATRIX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SURROUND_FLAGS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PAN_SURROUND_FROM_STEREO_MODE_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMEQ.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_3DATTRIBUTES.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_3DATTRIBUTES_MULTI.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DATA_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC_BOOL.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC_DATA.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC_FLOAT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC_INT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_DESC_UNION.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_FFT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_FLOAT_MAPPING.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_FLOAT_MAPPING_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_OVERALLGAIN.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_SIDECHAIN.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PARAMETER_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PITCHSHIFT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PROCESS_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_PROCESS_OPERATION.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_READCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_RELEASECALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_RESAMPLER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_RESETCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_RETURN.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SEND.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SETPARAM_BOOL_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SETPARAM_DATA_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SETPARAM_FLOAT_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SETPARAM_INT_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SETPOSITIONCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SFXREVERB.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SHOULDIPROCESS_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_STATE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_STATE_DFTCALLBACKS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_STATE_PAN_CALLBACKS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_STATE_SYSTEMCALLBACKS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_DEREGISTER_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_GETBLOCKSIZE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_GETSAMPLERATE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_GETSPEAKERMODE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_MIX_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_SYSTEM_REGISTER_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_THREE_EQ.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_THREE_EQ_CROSSOVERSLOPE_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_TRANSCEIVER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_TRANSCEIVER_SPEAKERMODE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_TREMOLO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\DSP_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Error.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ERRORCALLBACK_INFO.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\ERRORCALLBACK_INSTANCETYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Factory.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_ASYNCCANCELCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_ASYNCREADCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_CLOSECALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_OPENCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_READCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\FILE_SEEKCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Geometry.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\HandleBase.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\INITFLAGS.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Memory.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\MEMORY_ALLOC_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\MEMORY_FREE_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\MEMORY_REALLOC_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\MEMORY_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\MODE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\OPENSTATE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\OUTPUTTYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\PLUGINTYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\PORT_INDEX.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\PRESET.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\RESULT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Reverb3D.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\REVERB_PROPERTIES.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\Sound.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SoundGroup.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUNDGROUP_BEHAVIOR.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUND_FORMAT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUND_NONBLOCKCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUND_PCMREADCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUND_PCMSETPOSCALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SOUND_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SPEAKER.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SPEAKERMODE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\StringMarshalHelper.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\StringWrapper.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\System.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SYSTEM_CALLBACK.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\SYSTEM_CALLBACK_TYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\TAG.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\TAGDATATYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\TAGTYPE.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\TIMEUNIT.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\VECTOR.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\VERSION.cs" />
+        <Compile Include="AssetStudioUtility\FMOD\_3D_ATTRIBUTES.cs" />
+        <Compile Include="AssetStudioUtility\Smolv\OpData.cs" />
+        <Compile Include="AssetStudioUtility\Smolv\SmolvDecoder.cs" />
+        <Compile Include="AssetStudioUtility\Smolv\SpvOp.cs" />
+        <Compile Include="AssetStudioUtility\Smolv\SpvOpExtensions.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\AccessQualifier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\AccessQualifierParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\AddressingModel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\AddressingModelParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ArrayType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\BitEnumOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\BoolType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\BuiltIn.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\BuiltInParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Capability.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\CapabilityParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Decoration.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\DecorationParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\DeviceEventType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Dim.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\DimParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Disassembler.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\DisassemblyOptions.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\EnumType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\EventType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ExecutionMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ExecutionModel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ExecutionModelParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ExecutionModeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FloatingPointType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FPFastMathMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FPFastMathModeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FPRoundingMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FPRoundingModeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FunctionControl.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FunctionControlParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FunctionParameterAttribute.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FunctionParameterAttributeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\FunctionType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\GroupOperation.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\GroupOperationParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IBitEnumOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdMemorySemantics.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdRef.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdResult.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdResultType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdScope.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IdType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IEnumOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageChannelDataType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageChannelDataTypeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageChannelOrder.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageChannelOrderParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageFormat.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageFormatParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageOperands.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageOperandsParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ImageType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Instruction.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Instructions.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IntegerType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\IValueEnumOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\KernelEnqueueFlags.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\KernelEnqueueFlagsParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\KernelProfilingInfo.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\KernelProfilingInfoParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LinkageType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LinkageTypeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Literal.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralContextDependentNumber.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralExtInstInteger.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralInteger.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralNumber.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralSpecConstantOpInteger.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LiteralString.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LoopControl.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\LoopControlParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MatrixType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemoryAccess.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemoryAccessParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemoryModel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemoryModelParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemorySemantics.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\MemorySemanticsParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Meta.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Module.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ModuleHeader.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\NamedBarrier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ObjectReference.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAccessChain.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAll.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAny.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpaqueType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpArrayLength.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicAnd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicCompareExchange.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicCompareExchangeWeak.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicExchange.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicFlagClear.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicFlagTestAndSet.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicIAdd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicIDecrement.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicIIncrement.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicISub.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicLoad.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicOr.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicSMax.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicSMin.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicStore.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicUMax.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicUMin.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpAtomicXor.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitcast.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitCount.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitFieldInsert.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitFieldSExtract.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitFieldUExtract.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitReverse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitwiseAnd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitwiseOr.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBitwiseXor.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBranch.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBranchConditional.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpBuildNDRange.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCapability.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCaptureEventProfilingInfo.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCommitReadPipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCommitWritePipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCompositeConstruct.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCompositeExtract.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCompositeInsert.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstant.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantComposite.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantFalse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantNull.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantPipeStorage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantSampler.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConstantTrue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpControlBarrier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertFToS.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertFToU.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertPtrToU.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertSToF.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertUToF.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpConvertUToPtr.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCopyMemory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCopyMemorySized.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCopyObject.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCreatePipeFromPipeStorage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpCreateUserEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDecorate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDecorateId.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDecorationGroup.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDot.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdx.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdxCoarse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdxFine.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdy.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdyCoarse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpDPdyFine.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEmitStreamVertex.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEmitVertex.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEndPrimitive.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEndStreamPrimitive.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEnqueueKernel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEnqueueMarker.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpEntryPoint.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Operand.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OperandQuantifier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OperandType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpExecutionMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpExecutionModeId.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpExtension.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpExtInst.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpExtInstImport.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFAdd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFConvert.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFDiv.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFMod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFMul.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFNegate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdGreaterThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdGreaterThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdLessThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdLessThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFOrdNotEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFragmentFetchAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFragmentMaskFetchAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFRem.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFSub.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFunction.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFunctionCall.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFunctionEnd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFunctionParameter.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordGreaterThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordGreaterThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordLessThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordLessThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFUnordNotEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFwidth.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFwidthCoarse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpFwidthFine.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGenericCastToPtr.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGenericCastToPtrExplicit.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGenericPtrMemSemantics.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetDefaultQueue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelLocalSizeForSubgroupCount.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelMaxNumSubgroups.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelNDrangeMaxSubGroupSize.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelNDrangeSubGroupCount.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelPreferredWorkGroupSizeMultiple.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetKernelWorkGroupSize.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetMaxPipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGetNumPipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupAll.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupAny.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupAsyncCopy.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupBroadcast.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupCommitReadPipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupCommitWritePipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupDecorate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFAdd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFAddNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFMax.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFMaxNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFMin.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupFMinNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupIAdd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupIAddNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupMemberDecorate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupReserveReadPipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupReserveWritePipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupSMax.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupSMaxNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupSMin.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupSMinNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupUMax.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupUMaxNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupUMin.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupUMinNonUniformAMD.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpGroupWaitEvents.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIAdd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIAddCarry.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageDrefGather.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageFetch.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageGather.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQueryFormat.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQueryLevels.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQueryLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQueryOrder.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQuerySamples.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQuerySize.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageQuerySizeLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageRead.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleDrefExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleDrefImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleProjDrefExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleProjDrefImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleProjExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSampleProjImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseDrefGather.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseFetch.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseGather.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseRead.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleDrefExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleDrefImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleProjDrefExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleProjDrefImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleProjExplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseSampleProjImplicitLod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageSparseTexelsResident.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageTexelPointer.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpImageWrite.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIMul.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpInBoundsAccessChain.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpInBoundsPtrAccessChain.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpINotEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsFinite.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsInf.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsNan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsNormal.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpISub.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpISubBorrow.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsValidEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpIsValidReserveId.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpKill.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLabel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLessOrGreater.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLifetimeStart.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLifetimeStop.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLine.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLoad.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLogicalAnd.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLogicalEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLogicalNot.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLogicalNotEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLogicalOr.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpLoopMerge.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMatrixTimesMatrix.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMatrixTimesScalar.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMatrixTimesVector.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMemberDecorate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMemberName.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMemoryBarrier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMemoryModel.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpMemoryNamedBarrier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpModuleProcessed.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpName.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpNamedBarrierInitialize.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpNoLine.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpNop.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpNot.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpOrdered.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpOuterProduct.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpPhi.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpPtrAccessChain.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpPtrCastToGeneric.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpQuantizeToF16.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReadPipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReleaseEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReservedReadPipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReservedWritePipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReserveReadPipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReserveWritePipePackets.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpRetainEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReturn.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpReturnValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSampledImage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSatConvertSToU.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSatConvertUToS.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSConvert.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSDiv.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSelect.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSelectionMerge.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSetUserEventStatus.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSGreaterThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSGreaterThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpShiftLeftLogical.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpShiftRightArithmetic.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpShiftRightLogical.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSignBitSet.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSizeOf.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSLessThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSLessThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSMod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSMulExtended.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSNegate.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSource.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSourceContinued.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSourceExtension.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSpecConstant.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSpecConstantComposite.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSpecConstantFalse.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSpecConstantOp.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSpecConstantTrue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSRem.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpStore.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpString.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupAllEqualKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupAllKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupAnyKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupBallotKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupBlockReadINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupBlockWriteINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupFirstInvocationKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupImageBlockReadINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupImageBlockWriteINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupReadInvocationKHR.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupShuffleDownINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupShuffleINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupShuffleUpINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSubgroupShuffleXorINTEL.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpSwitch.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTranspose.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeArray.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeBool.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeDeviceEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeEvent.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeFloat.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeForwardPointer.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeFunction.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeImage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeInt.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeMatrix.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeNamedBarrier.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeOpaque.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypePipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypePipeStorage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypePointer.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeQueue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeReserveId.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeRuntimeArray.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeSampledImage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeSampler.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeStruct.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeVector.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpTypeVoid.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUConvert.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUDiv.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUGreaterThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUGreaterThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpULessThan.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpULessThanEqual.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUMod.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUMulExtended.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUndef.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUnordered.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpUnreachable.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVariable.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVectorExtractDynamic.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVectorInsertDynamic.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVectorShuffle.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVectorTimesMatrix.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpVectorTimesScalar.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\OpWritePipe.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PairIdRefIdRef.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PairIdRefLiteralInteger.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PairLiteralIntegerIdRef.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Parameter.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ParsedInstruction.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ParsedOperand.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PipeStorage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PipeType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\PointerType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\QueueType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Reader.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ReserveIdType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\RuntimeArrayType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SampledImageType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SamplerAddressingMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SamplerAddressingModeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SamplerFilterMode.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SamplerFilterModeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SamplerType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ScalarType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Scope.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ScopeParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SelectionControl.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SelectionControlParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SourceLanguage.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\SourceLanguageParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\StorageClass.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\StorageClassParameterFactory.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\StructType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\Type.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\ValueEnumOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\VaryingOperandValue.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\VectorType.cs" />
+        <Compile Include="AssetStudioUtility\SpirV\VoidType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AABB.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Animation.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationClipBindingConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationClipOverride.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationCurve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationEvent.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimationType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Animator.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimatorController.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AnimatorOverrideController.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ArchiveFlags.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AssetBundle.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AssetInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AssetsManager.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AudioClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AudioCompressionFormat.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Avatar.cs" />
+        <Compile Include="AssetStudio\AssetStudio\AvatarConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Axes.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Behaviour.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BigArrayPool.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BinaryReaderExtensions.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BinaryWriterExtensions.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Blend1dDataConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Blend2dDataConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BlendDirectDataConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BlendShapeData.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BlendShapeVertex.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BlendTreeConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BlendTreeNodeConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BoneWeights4.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BufferBinding.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BuildSettings.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BuildTarget.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BuildType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\BundleFile.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ChannelInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ClassIDType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Clip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ClipMuscleConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Collider.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Color.cs" />
+        <Compile Include="AssetStudio\AssetStudio\CommonString.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Component.cs" />
+        <Compile Include="AssetStudio\AssetStudio\CompressedAnimationCurve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\CompressedMesh.cs" />
+        <Compile Include="AssetStudio\AssetStudio\CompressionType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ConditionConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ConstantBuffer.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ConstantClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ControllerConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\DenseClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\DummyLogger.cs" />
+        <Compile Include="AssetStudio\AssetStudio\EditorExtension.cs" />
+        <Compile Include="AssetStudio\AssetStudio\EndianBinaryReader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\EndianType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FileIdentifier.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FileReader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FileType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FloatCurve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FMODSoundType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\FogMode.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Font.cs" />
+        <Compile Include="AssetStudio\AssetStudio\GameObject.cs" />
+        <Compile Include="AssetStudio\AssetStudio\GenericBinding.cs" />
+        <Compile Include="AssetStudio\AssetStudio\GfxPrimitiveType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\GLTextureSettings.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Half.cs" />
+        <Compile Include="AssetStudio\AssetStudio\HalfHelper.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Hand.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Handle.cs" />
+        <Compile Include="AssetStudio\AssetStudio\HandPose.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Hash128.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Human.cs" />
+        <Compile Include="AssetStudio\AssetStudio\HumanGoal.cs" />
+        <Compile Include="AssetStudio\AssetStudio\HumanPose.cs" />
+        <Compile Include="AssetStudio\AssetStudio\HumanPoseMask.cs" />
+        <Compile Include="AssetStudio\AssetStudio\IImported.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ILogger.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedAnimationKeyframedTrack.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedBlendShape.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedBone.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedFace.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedFrame.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedHelpers.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedKeyframe.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedKeyframedAnimation.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMaterial.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMaterialTexture.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMesh.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMorph.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMorphChannel.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMorphKeyframe.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedMorphVertex.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedSubmesh.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedTexture.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportedVertex.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ImportHelper.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Keyframe.cs" />
+        <Compile Include="AssetStudio\AssetStudio\LayerConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\LeafInfoConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Limit.cs" />
+        <Compile Include="AssetStudio\AssetStudio\LocalSerializedObjectIdentifier.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Logger.cs" />
+        <Compile Include="AssetStudio\AssetStudio\LoggerEvent.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Material.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Matrix4x4.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MatrixParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Mesh.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MeshBlendShape.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MeshBlendShapeChannel.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MeshFilter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MeshHelper.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MeshRenderer.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MinMaxAABB.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MonoBehaviour.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MonoScript.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MotionNeighborList.cs" />
+        <Compile Include="AssetStudio\AssetStudio\MovieTexture.cs" />
+        <Compile Include="AssetStudio\AssetStudio\NamedObject.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Node.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Object.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ObjectInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ObjectReader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PackedFloatVector.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PackedIntVector.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PackedQuatVector.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ParserBindChannels.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PassType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PlayerSettings.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PPtr.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PPtrCurve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\PPtrKeyframe.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Progress.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Quaternion.cs" />
+        <Compile Include="AssetStudio\AssetStudio\QuaternionCurve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Rectf.cs" />
+        <Compile Include="AssetStudio\AssetStudio\RectTransform.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Renderer.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ResourceManager.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ResourceReader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\RuntimeAnimatorController.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SamplerParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SecondarySpriteTexture.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SelectorStateConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SelectorTransitionConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedCustomEditorForRenderPipeline.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedFile.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedFileFormatVersion.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedFileHeader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedPass.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedProgram.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedProgramParameters.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedProperties.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedProperty.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedPropertyType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShaderDependency.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShaderFloatValue.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShaderRTBlendState.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShaderState.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedShaderVectorValue.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedStencilOp.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedSubProgram.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedSubShader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedTagMap.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedTextureProperty.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SerializedType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SevenZipHelper.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Shader.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ShaderBindChannel.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ShaderCompilerPlatform.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ShaderGpuProgramType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Skeleton.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SkeletonMask.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SkeletonMaskElement.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SkeletonPose.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SkinnedMeshRenderer.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Sprite.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteAtlas.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteAtlasData.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteMeshType.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpritePackingMode.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpritePackingRotation.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteRenderData.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteSettings.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SpriteVertex.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StateConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StateMachineConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StaticBatchInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StorageBlockFlags.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamedClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamedResource.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamExtensions.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamFile.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StreamingInfo.cs" />
+        <Compile Include="AssetStudio\AssetStudio\StructParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\SubMesh.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TextAsset.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Texture.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Texture2D.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TextureDimension.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TextureFormat.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TextureParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Transform.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TransitionConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TypeTree.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TypeTreeHelper.cs" />
+        <Compile Include="AssetStudio\AssetStudio\TypeTreeNode.cs" />
+        <Compile Include="AssetStudio\AssetStudio\UAVParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\UnityPropertySheet.cs" />
+        <Compile Include="AssetStudio\AssetStudio\UnityTexEnv.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ValueArray.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ValueArrayConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ValueConstant.cs" />
+        <Compile Include="AssetStudio\AssetStudio\ValueDelta.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Vector2.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Vector3.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Vector3Curve.cs" />
+        <Compile Include="AssetStudio\AssetStudio\Vector4.cs" />
+        <Compile Include="AssetStudio\AssetStudio\VectorParameter.cs" />
+        <Compile Include="AssetStudio\AssetStudio\VertexData.cs" />
+        <Compile Include="AssetStudio\AssetStudio\VideoClip.cs" />
+        <Compile Include="AssetStudio\AssetStudio\WebFile.cs" />
+        <Compile Include="AssetStudio\AssetStudio\xform.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\BitReader.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\BrotliInputStream.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\BrotliRuntimeException.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Context.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Decode.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Dictionary.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Huffman.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\HuffmanTreeGroup.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\IntReader.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Prefix.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\RunningState.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\State.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Transform.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\Utils.cs" />
+        <Compile Include="AssetStudio\Org\Brotli\Dec\WordTransformType.cs" />
+        <Compile Include="AssetStudio\SevenZip\Buffer\InBuffer.cs" />
+        <Compile Include="AssetStudio\SevenZip\Buffer\OutBuffer.cs" />
+        <Compile Include="AssetStudio\SevenZip\CoderPropID.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\CommandForm.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\CommandSubCharsSet.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\Parser.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\SwitchForm.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\SwitchResult.cs" />
+        <Compile Include="AssetStudio\SevenZip\CommandLineParser\SwitchType.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZMA\Base.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZMA\Decoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZMA\Encoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZ\BinTree.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZ\IInWindowStream.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZ\IMatchFinder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZ\InWindow.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\LZ\OutWindow.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\BitDecoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\BitEncoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\BitTreeDecoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\BitTreeEncoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\Decoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\Compression\RangeCoder\Encoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\CRC.cs" />
+        <Compile Include="AssetStudio\SevenZip\DataErrorException.cs" />
+        <Compile Include="AssetStudio\SevenZip\ICodeProgress.cs" />
+        <Compile Include="AssetStudio\SevenZip\ICoder.cs" />
+        <Compile Include="AssetStudio\SevenZip\InvalidParamException.cs" />
+        <Compile Include="AssetStudio\SevenZip\ISetCoderProperties.cs" />
+        <Compile Include="AssetStudio\SevenZip\ISetDecoderProperties.cs" />
+        <Compile Include="AssetStudio\SevenZip\IWriteCoderProperties.cs" />
+        <Compile Include="ImageSharpExtensions.cs" />
+        <Compile Include="MainForm.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="MainForm.Designer.cs">
+          <DependentUpon>MainForm.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="ServerEntry.cs" />
+        <Compile Include="ServerManagerApi.cs" />
+        <Compile Include="Texture2DDecoderWrapper\Texture2DDecoder\T2DDll.cs" />
+        <Compile Include="Texture2DDecoderWrapper\Texture2DDecoder\TextureDecoder.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="App.config" />
+      <None Include="packages.config" />
+      <None Include="qwq.snk" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="MainForm.resx">
+        <DependentUpon>MainForm.cs</DependentUpon>
+      </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="5067002021236704128.ico" />
+      <Content Include="app.manifest" />
+      <Content Include="Texture2DDecoderNative.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="..\packages\Fody.6.6.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.4\build\Fody.targets')" />
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+      <PropertyGroup>
+        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+      </PropertyGroup>
+      <Error Condition="!Exists('..\packages\Fody.6.6.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.6.4\build\Fody.targets'))" />
+      <Error Condition="!Exists('..\packages\ILMerge.Fody.1.24.0\build\ILMerge.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.Fody.1.24.0\build\ILMerge.Fody.props'))" />
+    </Target>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
